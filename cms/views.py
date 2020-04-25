@@ -28,15 +28,14 @@ def get_content(request, nombre):
     if request.method == "GET" or request.method == 'PUT':
         recurso = get_object_or_404(Contenido, clave=nombre)
 
-        return render(request, 'cms/content.html', {'recurso': recurso})
-        #return HttpResponse(recurso.valor)
+        return render(request, 'cms/content.html', {'recurso': recurso, 'doc_css': 'main.css'})
 
 
 @csrf_exempt
 def get_content_css(request, nombre):
     if request.method == "PUT":
         get_contenido(request, nombre)
-        
+
     if request.method == "GET" or request.method == 'PUT':
         recurso = get_object_or_404(Contenido, clave=nombre)
         return HttpResponse(recurso.valor, content_type='text/css')
