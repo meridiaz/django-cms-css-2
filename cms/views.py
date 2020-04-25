@@ -11,7 +11,7 @@ def index(request):
     return render(request, 'cms/index.html', context)
 
 
-def get_contenido(request, nombre):
+def store_content(request, nombre):
     valor = request.body.decode('utf-8')
     try:
         # si ya existe esa llave la sustituyo por el nuevo valor
@@ -25,7 +25,7 @@ def get_contenido(request, nombre):
 @csrf_exempt
 def get_content(request, nombre):
     if request.method == "PUT":
-        get_contenido(request, nombre)
+        store_content(request, nombre)
 
     if request.method == "GET" or request.method == 'PUT':
         recurso = get_object_or_404(Contenido, clave=nombre)
@@ -37,7 +37,7 @@ def get_content(request, nombre):
 @csrf_exempt
 def get_content_css(request, nombre):
     if request.method == "PUT":
-        get_contenido(request, nombre)
+        store_content(request, nombre)
 
     if request.method == "GET" or request.method == 'PUT':
         recurso = get_object_or_404(Contenido, clave=nombre)
